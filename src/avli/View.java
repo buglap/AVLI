@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class View extends javax.swing.JFrame {
          AVL tree = new AVL();
+         drawTree drawTree = new drawTree(); 
+                 
          
     /**
      * Creates new form View
@@ -250,41 +252,13 @@ public class View extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-        
-    /*permite graficar un árbol binario*/
-    private void drawTree(Graphics g, NodeAVL sheet, int x, int y,int xangle,int yangle,int level){
-     if (sheet == null) return;
-     
-     if(sheet.getLeftChild()!= null){
-         g.setColor(Color.black);
-         g.drawLine(x, y, x - xangle+(sheet.height*4), y + yangle );
-     }
-     if(sheet.getRightChild()!= null){
-         g.setColor(Color.black);
-         g.drawLine(x, y, x + xangle-(sheet.height*8), y + yangle);
-     }
-     g.setColor(Color.pink);
-    
-     g.fill3DRect(x-10, y-20, 35+sheet.height*4, 35, rootPaneCheckingEnabled);
-     
-     g.setColor(Color.black);
-     g.drawString(sheet.data+"", x , y );
-     if(sheet.getLeftChild()!=null){
-        drawTree(g, sheet.getLeftChild(), (int)(x - xangle), (y + yangle),xangle+level*2,yangle,level+1); 
-     }
-     if((sheet.getRightChild()!=null) && (sheet.rightChild.data != sheet.data)){
-     drawTree(g, sheet.getRightChild(), (int)(x + xangle), (y + yangle),xangle-level*2,yangle,level+1);
-        }
-     }
-
+ 
     @Override
     public void paint(Graphics g){
         jPanel1.revalidate();
         jPanel1.setBackground(Color.white);
         super.paint(g);
-        int X = getWidth()/7;
-        int Y = getHeight()/5;
-        drawTree(jPanel1.getGraphics(), tree.getRoot(), jPanel1.getWidth()/2, Y, X, Y,1);
+        drawTree.drawTree(jPanel1.getGraphics(), tree.getRoot(), jPanel1.getWidth()/2, getHeight()/5, getWidth()/7, getHeight()/10,1);
         
     }
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
